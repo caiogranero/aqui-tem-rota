@@ -14,7 +14,7 @@ const Stops = {
                     stop_point, 
                     ST_SetSRID(
                         ST_MakePoint(<!-- @echo lng -->, <!-- @echo lat -->), 4326
-                    ), 0.003
+                    ), 0.3/111.325
                 );`
         
         console.log(pp.preprocess(query, params))
