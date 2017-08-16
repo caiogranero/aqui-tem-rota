@@ -1,0 +1,27 @@
+# PostgreSQL
+#   gem install pg
+#
+#   Ensure the PostgreSQL gem is defined in your Gemfile
+#   gem 'pg'
+
+default: &default
+  adapter: postgis
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+  encoding: unicode
+  database: aqui_tem_rota
+  pool: 5
+  username: "caiogranero"
+  password: "123"
+
+development:
+  <<: *default
+
+test: &test
+  <<: *default
+
+production:
+  <<: *default
+
+cucumber:
+  <<: *test
