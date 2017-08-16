@@ -1,8 +1,8 @@
 import axios from 'axios'
 
 const StopsInstance = axios.create({
-  baseURL: '/api',
-  timeout: 5000
+  baseURL: '/api/stops',
+  timeout: 30000
 })
 
 export default {
@@ -11,7 +11,7 @@ export default {
       name: 'StopsService',
 
       getAllStops (params) {
-        return StopsInstance.get('/stops', {
+        return StopsInstance.get('/', {
           params: params
         })
       }

@@ -17,7 +17,6 @@ const Stops = {
                     ), 0.3/111.325
                 );`
         
-        console.log(pp.preprocess(query, params))
         return new Promise((resolve, reject) => {
             Database.query(pp.preprocess(query, params)).then(res => {
                     resolve(res)
