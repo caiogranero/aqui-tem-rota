@@ -1,0 +1,21 @@
+# Ignore rake-database
+rake-database/log/*
+rake-database/.bundle
+rake-database/.rake_tasks~
+rake-database/Gemfile.lock
+
+# Ignore web-app
+web-app/package-lock.json
+web-app/yarn.lock
+web-app/node_modules/
+web-app/dist/
+web-app/npm-debug.log*
+web-app/yarn-debug.log*
+web-app/yarn-error.log*
+web-app/test/unit/coverage
+web-app/test/e2e/reports
+web-app/selenium-debug.log
+
+# Ignore api
+/api/node_modules/
+/api/package-lock.json

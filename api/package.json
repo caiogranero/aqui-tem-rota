@@ -1,0 +1,24 @@
+{
+  "name": "aqui-tem-rota-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "yarn install && cd app && yarn install && yarn build"
+  },
+  "keywords": [],
+  "description": "Aplicação web desenvolvida com base nos dados no padrão GTFS disponibilizados pela SPTrans a respeito do transporte público da cidade de São Paulo.",
+  "author": "Caio Granero <caio.granero@usp.br>",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.16.2",
+    "body-parser": "^1.17.2",
+    "consign": "^0.1.6",
+    "cookie-parser": "^1.4.3",
+    "cors": "^2.8.4",
+    "express": "^4.15.3",
+    "helmet": "^3.6.1",
+    "pg": "^7.1.0",
+    "preprocess": "^3.1.0"
+  }
+}
