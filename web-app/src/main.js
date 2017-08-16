@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import store from './store'
 import Vue2Leaflet from 'vue2-leaflet'
 
 Vue.config.productionTip = false
@@ -19,6 +20,7 @@ Object.keys(AppServices).forEach(k => Vue.use(AppServices[k]))
 new Vue({
   el: '#app',
   router,
+  store,
   template: '<App/>',
   components: { App }
 })
