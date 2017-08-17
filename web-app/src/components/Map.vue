@@ -3,7 +3,7 @@
     <v-map v-on:l-click="onClick($event)" :zoom="zoom" :center="center">
       <v-tilelayer  :url="url" :attribution="attribution"></v-tilelayer>
       <v-marker v-for="stop in stops" :key="stop.stop_id" :lat-lng="stop.position"></v-marker>
-      <v-poly v-for="route in routes" :key="route.shape_id" :lat-lngs="route.position" :visible="true" v-on:l-click="whatShape(route.shape_id)"></v-poly>  
+      <v-poly v-for="route in routes" :color="route.color" :key="route.shape_id" :lat-lngs="route.position" :visible="true" v-on:l-click="whatShape(route.shape_id)"></v-poly>  
     </v-map>
   </div>
 </template>
@@ -85,7 +85,8 @@ export default {
               } else {
                 routes[count] = {
                   shape_id: route.shape_id,
-                  position: [[route.shape_pt_lat, route.shape_pt_lon]]
+                  position: [[route.shape_pt_lat, route.shape_pt_lon]],
+                  color: 'hsl(' + this.makeColor(count, Object.keys(data).length + 2) + ', 100%, 50%)'
                 }
               }
             })
@@ -113,9 +114,9 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .map {
   height: 100vh;
+  z-index: 0;
 }
 </style>
