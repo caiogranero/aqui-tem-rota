@@ -116,6 +116,6 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .map {
-  height: 600px;
+  height: 100vh;
 }
 </style>
