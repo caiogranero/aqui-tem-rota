@@ -9,9 +9,12 @@ const Stops = {
                 SHAPES.shape_id,    
                 SHAPES.shape_pt_lon,
                 SHAPES.shape_pt_lat,
+                TRIPS.trip_headsign,
+                ROUTES.route_id,
                 STOPS.stop_name,
                 STOPS.stop_lat,
-                STOPS.stop_lon
+                STOPS.stop_lon,
+                STOPS.stop_id
             FROM gtfs_engine_shapes AS SHAPES
             INNER JOIN gtfs_engine_trips AS TRIPS ON SHAPES.shape_id = TRIPS.shape_id
             INNER JOIN gtfs_engine_routes AS ROUTES ON TRIPS.route_id = ROUTES.route_id
@@ -24,7 +27,7 @@ const Stops = {
                     STOPS.stop_point, 
                     ST_SetSRID(
                         ST_MakePoint(<!-- @echo lng -->, <!-- @echo lat -->), 4326
-                    ), 0.15/111.325
+                    ), 0.10/111.325
                 )
             
             ORDER BY shape_id, shape_pt_sequence`

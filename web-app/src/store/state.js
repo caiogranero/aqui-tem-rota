@@ -1,5 +1,7 @@
 const state = {
-  userPosition: {}
+  userPosition: {},
+  stopsPoint: [],
+  routes: []
 }
 
 export default state
