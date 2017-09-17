@@ -46,6 +46,14 @@ export default {
       return this.$store.state.routes
     }
   },
+  watch: {
+    '$store.state.userPosition' (userPosition) {
+      this.center = [userPosition.lat, userPosition.lng]
+      this.pointToSearch.lat = userPosition.lat
+      this.pointToSearch.lng = userPosition.lng
+      this.getRoutes()
+    }
+  },
   methods: {
     whatShape (shapeId) {
       alert(shapeId)
@@ -122,19 +130,6 @@ export default {
         }
       })
     }
-  },
-
-  created () {
-    // Ao carregar a página, captura a posição atual do usuário,
-    // centraliza o mapa e busca os pontos de ônibus próximos
-    this.getPosition().then((position) => {
-      this.$store.commit('setUserPosition', {lat: position.coords.latitude, lng: position.coords.longitude})
-      // this.center = [position.coords.latitude, position.coords.longitude]
-      // this.getRoutes()
-    })
-    .catch((err) => {
-      console.error(err.message)
-    })
   }
 }
 </script>

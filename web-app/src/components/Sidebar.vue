@@ -79,10 +79,6 @@ export default {
       })
 
       this.$store.commit('setRoutes', this.routes)
-
-      // const selectedRouteIdx = this._.findIndex(this.routes, (route) => { return route.shape_id === shape_id })
-
-      // this.routes[selectedRouteIdx].color = '#EF6C00'
     }
   }
 }

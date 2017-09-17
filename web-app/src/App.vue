@@ -1,16 +1,17 @@
 <template>
   <div id="app">
     <sidebar></sidebar>
+    <location></location>
     <router-view id="page-content"></router-view>
   </div>
 </template>
 
 <script>
 import Sidebar from '@/components/Sidebar'
-
+import Location from '@/components/Location'
 export default {
   name: 'app',
-  components: { Sidebar }
+  components: { Sidebar, Location }
 }
 </script>
 
@@ -31,6 +32,13 @@ body {
   position: absolute;
   height: 100%;
   left: 95%;
+}
+
+#location {
+  z-index: 1;
+  position: absolute;
+  height: 100%;
+  left: 0%;
 }
 
 #page-content {
