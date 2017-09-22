@@ -26,6 +26,7 @@ export default {
       this.getPosition().then(position => {
         document.getElementById('location-icon').classList.remove('disabld')
         document.getElementById('location-icon').classList.add('enabled')
+        // this.$store.commit('setUserPosition', {lat: 0, lng: 0})
         this.$store.commit('setUserPosition', {lat: position.coords.latitude, lng: position.coords.longitude})
       }, err => {
         console.error(err.message)

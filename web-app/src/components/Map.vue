@@ -2,6 +2,7 @@
   <div class="map">
     <snack-bar :content="snackBarContent" :open="showSnackBar"></snack-bar>
     <v-map v-on:l-click="onClick($event)" :zoom="zoom" :center="center">
+      <v-circle :radius="4" :latLng="center" :weight="2"></v-circle>
       <v-tilelayer  :url="url" :attribution="attribution"></v-tilelayer>
       <v-marker v-for="stop in stopsPoint" :key="stop.id" :lat-lng="stop.position">
         <v-tooltip :content="stop.name"></v-tooltip>
@@ -110,7 +111,7 @@ export default {
                 routes[count] = {
                   shape_id: route.shape_id,
                   position: [[route.shape_pt_lat, route.shape_pt_lon]],
-                  color: '#90CAF9',
+                  color: '#C090F9',
                   route_id: route.route_id,
                   trip_headsign: route.trip_headsign,
                   weight: 3
@@ -125,7 +126,7 @@ export default {
         } else {
           this.$store.commit('setStopsPoint', [])
           this.$store.commit('setRoutes', [])
-          this.snackBarContent = 'Não há linhas de ônibus nas proximidades, escolha outro lugar do mapa!'
+          this.snackBarContent = 'Não há linhas de ônibus nas proximidades'
           this.showSnackBar = !this.showSnackBar
         }
       })

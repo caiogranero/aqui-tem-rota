@@ -44,6 +44,4 @@ body {
 #page-content {
   position: relative;
 }
-
-
 </style>

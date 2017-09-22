@@ -17,6 +17,7 @@ Vue.component('v-tilelayer', Vue2Leaflet.TileLayer)
 Vue.component('v-marker', Vue2Leaflet.Marker)
 Vue.component('v-poly', Vue2Leaflet.Polyline)
 Vue.component('v-tooltip', Vue2Leaflet.Tooltip)
+Vue.component('v-circle', Vue2Leaflet.LCircle)
 
 Vue.use(VueLodash, lodash)
 Vue.use(VueMaterial)

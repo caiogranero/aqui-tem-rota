@@ -5,7 +5,7 @@
     </md-button>
 
     <md-sidenav class="md-right" id="side-nav" ref="rightSidenav" @open="open('Right')" @close="close('Right')">
-      <md-list class="md-dense">
+      <md-list class="md-dense" v-if="stopsPoint.length > 0">
         <md-list-item>
           <div class="md-list-text-container">
             <span>Pontos mais próximos</span>
@@ -19,7 +19,7 @@
           </div>
         </md-list-item>
       </md-list>
-      <md-list class="md-dense">
+      <md-list class="md-dense" v-if="routes.length > 0">
         <md-list-item>
           <div class="md-list-text-container">
             <span>Linhas</span>
@@ -70,10 +70,10 @@ export default {
     selectRoute (shape_id) {
       this.routes.forEach((route, idx) => {
         if (route.shape_id === shape_id) {
-          route.color = '#01579B'
+          route.color = '#48657C'
           route.weight = 7
         } else {
-          route.color = '#90CAF9'
+          route.color = '#C090F9'
           route.weight = 3
         }
       })

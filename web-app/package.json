@@ -23,6 +23,7 @@
     "vue-material": "^0.7.4",
     "vue-router": "^2.6.0",
     "vue2-leaflet": "0.0.51",
+    "vuejs-autocomplete": "^0.1.1",
     "vuex": "^2.3.1"
   },
   "devDependencies": {
