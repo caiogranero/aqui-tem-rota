@@ -7,15 +7,6 @@ const Database = {
         if (err) reject(err)
         resolve(result)
       })
-
-    })
-  },
-  insert (table, items) {
-    return new Promise((resolve, reject) => {
-      db.query(`INSERT INTO ${table} SET ?`, items, (err, result) => {
-        if (err) reject(err)
-        resolve(result.insertId)
-      })
     })
   }
 }

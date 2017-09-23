@@ -1,7 +1,5 @@
-import Stops from './Stops'
-import Routes from './Routes'
+import Map from './Map'
 
 export default {
-  Stops,
-  Routes
+  Map
 }

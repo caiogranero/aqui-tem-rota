@@ -1,18 +1,47 @@
-# aqui-tem-rota 
+aqui-tem-rota 
+===================
 
 CodeClimate badge: [![codeclimate](https://codeclimate.com/github/caiogranero/aqui-tem-rota/badges/gpa.svg)](https://codeclimate.com/github/caiogranero/aqui-tem-rota)
 
-Aplicação web desenvolvida com base nos dados no padrão GTFS disponibilizados pela SPTrans a respeito do transporte público da cidade de São Paulo.
+Aplicação web desenvolvida com base nos dados no padrão GTFS disponibilizados pela SPTrans a respeito das rotas de ônibus da cidade de São Paulo.
 
-## Dependencias
+## Introdução
 
-* postgis: `sudo apt-get install postgis`
-* postgresql
+
+
+## Arquitetura utilizada
+
+Desenvolvido utilizando Node.js, Vue.js, Ruby e PostgreSQL
+
+### PostgreSQL + PostGIS
+
+Por padrão, [PostgreSQL] tem suporte para dados do tipo geométricos. Para dados georreferenciados existe uma extensão para o mesmo que é o [PostGIS], esse incrementa as funcionalidades permitindo que atributos com posições geométricas serem usadas em consultas SQL.
+
+Isso permitiu que fosse possível buscar todas as informações que estão na base de dados referentes a uma distância de um determinado ponto (latitude, longitude).
+
+### Node.js + Express
+
+Para a comunicação entre a aplicação e o banco de dados, foi desenvolvido um projeto em [Node.js] com o framework [Express], aonde é exposto uma API com alguns endpoints que dado determinados parâmetros, ela retorna a informação necessária.
+
+### Vue.js
+
+No desenvolvimento da interface da aplicação, foi utilizado o framework [Vue.js]. Como biblioteca de mapa, foi usado o projeto [Vue2Leaflef] que é uma implementação do [leaflet.js] para o Vue.js.
+
+### Ruby
+
+Para a manipulação e inserção dos dados disponibilizados pela SPTrans, foi desenvolvido um script em Ruby faz todo o serviço de extrair e adicionar no banco de dados já com os dados no formato que o PostGIS utiliza.
 
 ## Baixando e rodando
 
-```
-git clone git@github.com:caiogranero/aonde-vou.git
+``` bash
+# Instalando o PostgreSQL
+sudo apt-get install postgresql
+# Instalando o PostGIS
+sudo apt-get install postgis
+
+# Clonando o repositório
+git clone git@github.com:caiogranero/aqui-tem-rota.git
+
 cd rake_database
 bundle install
 rake gtfs:import
@@ -20,13 +49,17 @@ rake gtfs:import
 
 Executando `rake gtfs:import`, todos os dados fornecidos pela SPTrans no padrão GTFS serão instalados em seu banco de dados local.
 
-## Por que PostgreSQL?
+## TODOs
 
-Por padrão, [PostgreSQL][postgresql] tem suporte para dados do tipo geométricos, e além disso tem uma extensão que se chama [PostGIS][postgis] que incrementa essas funcionalidades permitindo que atributos com posições geométricas serem usadas em consultas SQL.
+1. Testes de unidade na api
+2. Testes de unidade no web-app
+3. Testes de aceitação no web-app
+4. Continuar integração com o travis
+5. Organizar a área dos links úteis
 
-Essa extensão também tem suporte para o [Ruby On Rails][ruby-on-rails] que é feito com a [gem activerecord-postgis-adapter][activerecord-postgis-adapter]
+## Perguntas?
 
-Obs: No MySQL 5.7.8 e no MariaDB 5.3.3 também se tornou possível a manipulação de dados do tipo geométrico nos respectivos SGBD, entretando, para realizar a inserção desses dados, é necessário ser feita a conversão deles breviamente, diferente do PostgreSQL.
+Sugestões, críticas ou dúvidas? Crie uma [issue] =D
 
 ## Links úteis
 
@@ -44,7 +77,13 @@ https://www.postgresql.org/docs/9.5/static/functions-geometry.html
 
 https://gis.stackexchange.com/questions/24486/inserting-point-into-postgishttps://gis.stackexchange.com/questions/24486/inserting-point-into-postgis
 
-[postgresql]: https://www.postgresql.org/
-[postgis]: http://postgis.net/
-[ruby-on-rails]: http://rubyonrails.org/
-[activerecord-postgis-adapter]: https://github.com/rgeo/activerecord-postgis-adapter
+[PostgreSQL]: https://www.postgresql.org/
+[PostGIS]: http://postgis.net/
+[api-project]: https://github.com/caiogranero/aqui-tem-rota/tree/master/api
+[Node.js]: https://nodejs.org/en/
+[Express]: http://expressjs.com/pt-br/
+[Vue.js]: https://vuejs.org/
+[Docker]: http://docker.io/
+[Vue2Leaflef]: https://github.com/KoRiGaN/Vue2Leaflet
+[leaflet.js]: http://leafletjs.com/
+[issue]: https://github.com/caiogranero/aqui-tem-rota/issues

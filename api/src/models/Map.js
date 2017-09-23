@@ -1,9 +1,9 @@
 const Database = require('../helpers/Database')
-var pp = require('preprocess')
+const pp = require('preprocess')
 
-const Stops = {
-    getAll(params) {
-        const query = 
+const Map = {
+  get (params) {
+    const query =
             `
             SELECT 
                 SHAPES.shape_id,    
@@ -31,15 +31,15 @@ const Stops = {
                 )
             
             ORDER BY shape_id, shape_pt_sequence`
-        return new Promise((resolve, reject) => {
-            Database.query(pp.preprocess(query, params)).then(res => {
-                    resolve(res)
-                })
+    return new Promise((resolve, reject) => {
+      Database.query(pp.preprocess(query, params)).then(res => {
+        resolve(res)
+      })
                 .catch(err => {
-                    reject(err)
+                  reject(err)
                 })
-        })
-    }
+    })
+  }
 }
 
-module.exports = Stops
+module.exports = Map

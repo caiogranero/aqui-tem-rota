@@ -1,8 +1,5 @@
-# PostgreSQL
-#   gem install pg
-#
-#   Ensure the PostgreSQL gem is defined in your Gemfile
-#   gem 'pg'
+# Ensure the PostgreSQL gem is defined in your Gemfile
+# gem 'pg'
 
 default: &default
   adapter: postgis
@@ -17,11 +14,5 @@ default: &default
 development:
   <<: *default
 
-test: &test
-  <<: *default
-
 production:
   <<: *default
-
-cucumber:
-  <<: *test

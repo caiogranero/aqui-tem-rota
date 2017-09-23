@@ -88,7 +88,7 @@ export default {
     getRoutes () {
       this.stops = []
       const params = {lat: this.pointToSearch.lat, lng: this.pointToSearch.lng}
-      this.$RoutesService.getAllRoutes(params).then(res => {
+      this.$MapService.get(params).then(res => {
         if (res.data.results.rowCount > 0) {
           const data = this._.groupBy(res.data.results.rows, (row) => {
             return row.shape_id

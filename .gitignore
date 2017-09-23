@@ -19,3 +19,4 @@ web-app/selenium-debug.log
 # Ignore api
 /api/node_modules/
 /api/package-lock.json
+/api/src/static/

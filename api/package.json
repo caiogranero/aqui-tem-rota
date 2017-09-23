@@ -4,6 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "cd src/ && nodemon",
     "build": "yarn install && cd app && yarn install && yarn build"
   },
   "keywords": [],
