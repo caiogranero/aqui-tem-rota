@@ -1,8 +1,8 @@
-# Ignore rake-database
-rake-database/log/*
-rake-database/.bundle
-rake-database/.rake_tasks~
-rake-database/Gemfile.lock
+# Ignore database
+database/log/*
+database/.bundle
+database/.rake_tasks~
+database/Gemfile.lock
 
 # Ignore web-app
 web-app/package-lock.json
