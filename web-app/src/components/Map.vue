@@ -61,7 +61,7 @@ export default {
   },
   methods: {
     selectStopPoint (stopId) {
-      const params = { lat: this.pointToSearch.lat, lng: this.pointToSearch.lng, stopId }
+      const params = { stopId }
       this.getRoutes(params)
     },
     // On select a route in the map

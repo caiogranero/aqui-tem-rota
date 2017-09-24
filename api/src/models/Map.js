@@ -24,13 +24,15 @@ const Map = {
             WHERE 
                 ROUTES.route_type = 3 AND
 
-                <!-- @ifndef stopId -->
+                <!-- @ifdef lng -->
+                <!-- @ifdef lat -->
                 ST_DWithin(
                     STOPS.stop_point, 
                     ST_SetSRID(
                         ST_MakePoint(<!-- @echo lng -->, <!-- @echo lat -->), 4326
                     ), 0.10/111.325
                 )
+                <!-- @endif -->
                 <!-- @endif -->
 
                 <!-- @ifdef stopId -->
@@ -39,7 +41,6 @@ const Map = {
             
             ORDER BY shape_id, shape_pt_sequence`
 
-    console.log(pp.preprocess(query, params))
     return new Promise((resolve, reject) => {
       Database.query(pp.preprocess(query, params)).then(res => {
         resolve(res)

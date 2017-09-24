@@ -73,15 +73,16 @@ Executando `rake gtfs:import`, todos os dados fornecidos pela SPTrans no padrão
 
 ## TODOs
 
-1. Testes de unidade na api
-2. Testes de unidade no web-app
-3. Testes de aceitação no web-app
-4. Continuar integração com o travis
-5. Organizar a área dos links úteis
+- [ ] Testes de unidade na api
+- [ ] Testes de unidade no web-app
+- [ ] Testes de aceitação no web-app
+- [ ] Continuar integração com o travis
+- [ ] Organizar a área dos links úteis
+- [ ] Automatizar o deploy
 
 ## Perguntas?
 
-Sugestões, críticas ou dúvidas? Crie uma [issue] =D
+Sugestões, críticas ou dúvidas? Crie uma [issue] ou me mande um e-mail: caio.granero@usp.br  =D
 
 ## Links úteis
 
