@@ -1,10 +1,10 @@
 <template>
   <div class="map">
-    <snack-bar :content="snackBarContent" :open="showSnackBar"></snack-bar>
+    <snack-bar :content="snackBarContent" :open="showSnackBar" :duration="durationMessage"></snack-bar>
     <v-map v-on:l-click="onClick($event)" :zoom="zoom" :center="center">
       <v-circle :radius="4" :latLng="center" :weight="2"></v-circle>
-      <v-tilelayer  :url="url" :attribution="attribution"></v-tilelayer>
-      <v-marker v-for="stop in stopsPoint" :key="stop.id" :lat-lng="stop.position">
+      <v-tilelayer :url="url" :attribution="attribution"></v-tilelayer>
+      <v-marker v-for="stop in stopsPoint" :key="stop.id" :lat-lng="stop.position" v-on:l-click="selectStopPoint(stop.id)">
         <v-tooltip :content="stop.name"></v-tooltip>
       </v-marker>
       <v-poly v-for="route in routes" 
@@ -12,7 +12,7 @@
               :key="route.shape_id" 
               :lat-lngs="route.position" 
               :visible="true" 
-              v-on:l-click="whatShape(route.shape_id)" 
+              v-on:l-click="selectRoute(route.shape_id)" 
               :weight="route.weight"></v-poly>
     </v-map>
   </div>
@@ -20,6 +20,7 @@
 
 <script>
 /* global L:true */
+/* eslint camelcase: 0 */
 
 import mixins from '@/components/mixins'
 import SnackBar from '@/components/SnackBar'
@@ -32,10 +33,12 @@ export default {
       zoom: 100,
       center: [-23.550277533841815, -46.63393735885621],
       url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
-      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+      attribution: '&copy; Desenvolvido por <a target="_blank" href="https://github.com/caiogranero">Caio Granero</a><br>Acesse <a href="https://github.com/caiogranero/aqui-tem-rota" target="_blank"> o repositório </a>do projeto e conheça mais.',
       pointToSearch: {},
       snackBarContent: '',
-      showSnackBar: false
+      showSnackBar: false,
+      selectingRoute: false,
+      durationMessage: 3000
     }
   },
   components: { SnackBar },
@@ -52,21 +55,44 @@ export default {
       this.center = [userPosition.lat, userPosition.lng]
       this.pointToSearch.lat = userPosition.lat
       this.pointToSearch.lng = userPosition.lng
-      this.getRoutes()
+      const params = {lat: this.pointToSearch.lat, lng: this.pointToSearch.lng}
+      this.getRoutes(params)
     }
   },
   methods: {
-    whatShape (shapeId) {
-      alert(shapeId)
+    selectStopPoint (stopId) {
+      const params = { lat: this.pointToSearch.lat, lng: this.pointToSearch.lng, stopId }
+      this.getRoutes(params)
+    },
+    // On select a route in the map
+    selectRoute (shape_id) {
+      this.selectingRoute = true
+      this.routes.forEach((route, idx) => {
+        if (route.shape_id === shape_id) {
+          route.color = '#48657C'
+          route.weight = 7
+        } else {
+          route.color = '#C090F9'
+          route.weight = 3
+        }
+      })
+
+      this.$store.commit('setRoutes', this.routes)
+      setTimeout(() => {
+        this.selectingRoute = false
+      }, 100)
     },
 
     // Evento de click no mapa.
     // Ao ser clicado, altera o centro do mapa e consulta todos os pontos de ônibus próximos aquele local.
     onClick ($event) {
-      this.pointToSearch.lat = $event.latlng.lat
-      this.pointToSearch.lng = $event.latlng.lng
-      this.center = [$event.latlng.lat, $event.latlng.lng]
-      this.getRoutes()
+      if (!this.selectingRoute) {
+        this.pointToSearch.lat = $event.latlng.lat
+        this.pointToSearch.lng = $event.latlng.lng
+        this.center = [$event.latlng.lat, $event.latlng.lng]
+        const params = {lat: this.pointToSearch.lat, lng: this.pointToSearch.lng}
+        this.getRoutes(params)
+      }
     },
 
     // Recebe um Map com a posição dos pontos de ônibus key: stop_id e value: LatLng
@@ -85,9 +111,12 @@ export default {
 
     // Consulta todas as informações de pontos de ônibus e rotas
     // para a posição que o usuário escolheu
-    getRoutes () {
+    getRoutes (params) {
       this.stops = []
-      const params = {lat: this.pointToSearch.lat, lng: this.pointToSearch.lng}
+      this.durationMessage = 'Infinity'
+      this.snackBarContent = 'Aguarde enquanto as informações são carregadas...'
+      this.showSnackBar = !this.showSnackBar
+
       this.$MapService.get(params).then(res => {
         if (res.data.results.rowCount > 0) {
           const data = this._.groupBy(res.data.results.rows, (row) => {
@@ -127,8 +156,10 @@ export default {
           this.$store.commit('setStopsPoint', [])
           this.$store.commit('setRoutes', [])
           this.snackBarContent = 'Não há linhas de ônibus nas proximidades'
+          this.durationMessage = 3000
           this.showSnackBar = !this.showSnackBar
         }
+        this.durationMessage = 1000
       })
     }
   }

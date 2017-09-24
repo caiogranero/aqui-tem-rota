@@ -10,7 +10,7 @@ export default {
   name: 'SnackBar',
   props: {
     duration: {
-      type: Number,
+      type: [Number, String],
       default: 3000
     },
     content: String,

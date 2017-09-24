@@ -25,7 +25,7 @@
             <span>Linhas</span>
           </div>
         </md-list-item>
-        <md-list-item v-for="route in routes" :key="route.trip_id" @click="selectRoute(route.shape_id)">
+        <md-list-item :class="route.status" v-for="route in routes" :key="route.trip_id" @click="selectRoute(route.shape_id)" @mouseover.native="selectRoute(route.shape_id)">
           <md-icon class="sidebar-icons" md-iconset="fa fa-bus"></md-icon>
 
           <div class="md-list-text-container">
@@ -72,9 +72,11 @@ export default {
         if (route.shape_id === shape_id) {
           route.color = '#48657C'
           route.weight = 7
+          route.status = 'selected'
         } else {
           route.color = '#C090F9'
           route.weight = 3
+          route.status = ''
         }
       })
 
@@ -99,5 +101,9 @@ export default {
 
 #side-nav span {
   font-size: 14px;
+}
+
+.menu-list-selected {
+  background-color: rgba(153, 153, 153, 0.2)
 }
 </style>

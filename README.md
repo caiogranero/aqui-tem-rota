@@ -7,7 +7,7 @@ Aplicação web desenvolvida com base nos dados no padrão GTFS disponibilizados
 
 ## Introdução
 
-
+TODO
 
 ## Arquitetura utilizada
 
@@ -34,17 +34,39 @@ Para a manipulação e inserção dos dados disponibilizados pela SPTrans, foi d
 ## Baixando e rodando
 
 ``` bash
+# Instalando o node
+curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+sudo apt-get install -y nodejs
+sudo apt-get install -y build-essential
+
+# Instalando o ruby
+sudo apt-get install ruby-full
+
+sudo apt-get install ruby-bundler
+
 # Instalando o PostgreSQL
 sudo apt-get install postgresql
+
 # Instalando o PostGIS
 sudo apt-get install postgis
 
 # Clonando o repositório
 git clone git@github.com:caiogranero/aqui-tem-rota.git
 
-cd rake_database
+# Para fazer o upload da base de dados no seu banco de dados local, rode:
+cd database
 bundle install
 rake gtfs:import
+
+# Para executar a API em node.js, execute:
+
+cd api
+npm run dev
+
+# Para executar o front-end em Vue.js, execute
+
+cp web-app
+npm run dev
 ```
 
 Executando `rake gtfs:import`, todos os dados fornecidos pela SPTrans no padrão GTFS serão instalados em seu banco de dados local.

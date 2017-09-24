@@ -22,22 +22,31 @@ const Map = {
             INNER JOIN gtfs_engine_stops AS STOPS ON STOPS.stop_id = STOP_TIMES.stop_id
 
             WHERE 
-                ROUTES.route_type = 3 AND 
+                ROUTES.route_type = 3 AND
+
+                <!-- @ifndef stopId -->
                 ST_DWithin(
                     STOPS.stop_point, 
                     ST_SetSRID(
                         ST_MakePoint(<!-- @echo lng -->, <!-- @echo lat -->), 4326
                     ), 0.10/111.325
                 )
+                <!-- @endif -->
+
+                <!-- @ifdef stopId -->
+                STOPS.stop_id = '<!-- @echo stopId -->'
+                <!-- @endif -->                
             
             ORDER BY shape_id, shape_pt_sequence`
+
+    console.log(pp.preprocess(query, params))
     return new Promise((resolve, reject) => {
       Database.query(pp.preprocess(query, params)).then(res => {
         resolve(res)
       })
-                .catch(err => {
-                  reject(err)
-                })
+      .catch(err => {
+        reject(err)
+      })
     })
   }
 }
