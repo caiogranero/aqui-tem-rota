@@ -3,12 +3,28 @@ aqui-tem-rota
 
 CodeClimate badge: [![codeclimate](https://codeclimate.com/github/caiogranero/aqui-tem-rota/badges/gpa.svg)](https://codeclimate.com/github/caiogranero/aqui-tem-rota)
 
-Aplicação web desenvolvida com base nos dados no padrão GTFS disponibilizados pela SPTrans a respeito das rotas de ônibus da cidade de São Paulo.
+Aplicação web desenvolvida com base nos dados no padrão GTFS disponibilizados pela SPTrans a respeito das rotas de ônibus da cidade de São Paulo. 
+
+Desenvolvido como trabalho de conclusão de curso em Sistemas de Informação pela EACH-USP por: [Caio Granero][caiogranero] e [Prof. Dr. Daniel Cordeiro][cordeiro]
 
 ## Introdução
 
 TODO
 
+## Funcionalidades
+
+- [x] Buscar localização atual do usuário
+- [x] Opção para centralizar o mapa na localização do usuário
+- [x] Exibir todas as rotas após clicar no mapa
+- [x] Exibir todas os pontos após clicar no mapa
+- [x] Criar um menu lateral com as informações básicas de rotas e pontos de ônibus
+- [x] Ao passar o mapa pela descrição da rota, destacar essa rota no mapa
+- [x] Ao clicar em um ponto de ônibus no mapa, mostrar apenas as rotas desse ponto
+- [ ] Permitir ao usuário alterar o raio de busca
+- [ ] Disponibilizar mais informações a respeito das rotas para o usuário
+- [ ] Permitir buscar as rotas de um endereço específico
+
+Sugestões de funcionalidades? Crie uma [issue] ou me mande um e-mail: caio.granero@usp.br
 ## Arquitetura utilizada
 
 Desenvolvido utilizando Node.js, Vue.js, Ruby e PostgreSQL
@@ -110,3 +126,5 @@ https://gis.stackexchange.com/questions/24486/inserting-point-into-postgishttps:
 [Vue2Leaflef]: https://github.com/KoRiGaN/Vue2Leaflet
 [leaflet.js]: http://leafletjs.com/
 [issue]: https://github.com/caiogranero/aqui-tem-rota/issues
+[cordeiro]: https://github.com/cordeiro
+[caiogranero]: https://github.com/caiogranero
