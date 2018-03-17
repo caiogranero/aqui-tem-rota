@@ -1,47 +1,23 @@
 <template>
   <div id="app">
-    <sidebar></sidebar>
-    <location></location>
-    <router-view id="page-content"></router-view>
+    <navbar></navbar>
+    <router-view class="router"></router-view>
+    <!-- <BottomBar></BottomBar> -->
   </div>
 </template>
 
 <script>
-import Sidebar from '@/components/Sidebar'
-import Location from '@/components/Location'
+import BottomBar from '@/components/BottomBar'
+import Navbar from '@/components/Navbar'
+
 export default {
   name: 'app',
-  components: { Sidebar, Location }
+  components: { Navbar, BottomBar }
 }
 </script>
 
 <style>
-
-body {
-  margin: 0px
-}
-
-#app {
-  overflow-x: hidden;
-  position:relative;
-  height:100vh;
-}
-
-#sidebar {
-  z-index: 1;
-  position: absolute;
-  height: 100%;
-  left: 95%;
-}
-
-#location {
-  z-index: 1;
-  position: absolute;
-  height: 0%;
-  left: 0%;
-}
-
-#page-content {
-  position: relative;
+html, body{
+  height: 100%
 }
 </style>

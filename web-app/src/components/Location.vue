@@ -46,6 +46,12 @@ export default {
 </script>
 
 <style scoped>
+#location {
+  z-index: 1;
+  position: absolute;
+  height: 0%;
+  left: 0%;
+}
 
 #location-button {
   float: left;

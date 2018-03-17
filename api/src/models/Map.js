@@ -30,7 +30,7 @@ const Map = {
                     STOPS.stop_point, 
                     ST_SetSRID(
                         ST_MakePoint(<!-- @echo lng -->, <!-- @echo lat -->), 4326
-                    ), 0.10/111.325
+                    ), 0.50/111.325
                 )
                 <!-- @endif -->
                 <!-- @endif -->

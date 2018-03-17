@@ -1,20 +1,25 @@
 <template>
-  <div class="map">
-    <snack-bar :content="snackBarContent" :open="showSnackBar" :duration="durationMessage"></snack-bar>
-    <v-map v-on:l-click="onClick($event)" :zoom="zoom" :center="center">
-      <v-circle :radius="4" :latLng="center" :weight="2"></v-circle>
-      <v-tilelayer :url="url" :attribution="attribution"></v-tilelayer>
-      <v-marker v-for="stop in stopsPoint" :key="stop.id" :lat-lng="stop.position" v-on:l-click="selectStopPoint(stop.id)">
-        <v-tooltip :content="stop.name"></v-tooltip>
-      </v-marker>
-      <v-poly v-for="route in routes" 
-              :color="route.color" 
-              :key="route.shape_id" 
-              :lat-lngs="route.position" 
-              :visible="true" 
-              v-on:l-click="selectRoute(route.shape_id)" 
-              :weight="route.weight"></v-poly>
-    </v-map>
+  <div>
+    <location></location>
+
+    <div id="map-container" :style="{height:mapHeight}">
+      <snack-bar :content="snackBarContent" :open="showSnackBar" :duration="durationMessage"></snack-bar>
+
+      <v-map v-on:l-click="onClick($event)" :zoom="zoom" :center="center">
+        <v-circle :radius="4" :latLng="center" :weight="2"></v-circle>
+        <v-tilelayer :url="url" :attribution="attribution"></v-tilelayer>
+        <v-marker v-for="stop in stopsPoint" :key="stop.id" :lat-lng="stop.position" v-on:l-click="selectStopPoint(stop.id)">
+          <v-tooltip :content="stop.name"></v-tooltip>
+        </v-marker>
+        <v-poly v-for="route in routes" 
+                :color="route.color" 
+                :key="route.shape_id" 
+                :lat-lngs="route.position" 
+                :visible="true" 
+                v-on:l-click="selectRoute(route.shape_id)" 
+                :weight="route.weight"></v-poly>
+      </v-map>
+    </div>
   </div>
 </template>
 
@@ -24,16 +29,18 @@
 
 import mixins from '@/components/mixins'
 import SnackBar from '@/components/SnackBar'
+import Location from '@/components/Location'
 
 export default {
   name: 'Map',
   mixins: [mixins],
   data () {
     return {
+      mapHeight: '900px',
       zoom: 100,
       center: [-23.550277533841815, -46.63393735885621],
       url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
-      attribution: '&copy; Desenvolvido por <a target="_blank" href="https://github.com/caiogranero">Caio Granero</a><br>Acesse <a href="https://github.com/caiogranero/aqui-tem-rota" target="_blank"> o repositório </a>do projeto e conheça mais.',
+      attribution: '&copy; Desenvolvido por <a target="_blank" href="https://github.com/caiogranero">Caio Granero</a>',
       pointToSearch: {},
       snackBarContent: '',
       showSnackBar: false,
@@ -41,7 +48,16 @@ export default {
       durationMessage: 3000
     }
   },
-  components: { SnackBar },
+  components: { SnackBar, Location },
+
+  mounted () {
+    this.calcMapHeight()
+    // TODO: Colocar debounce na funçao
+    window.onresize = (event) => {
+      this.calcMapHeight()
+    }
+  },
+
   computed: {
     stopsPoint () {
       return this.$store.state.stopsPoint
@@ -60,6 +76,15 @@ export default {
     }
   },
   methods: {
+    calcMapHeight () {
+      const windowHeight = document.getElementsByTagName('html')[0].clientHeight
+      const headerHeight = document.getElementsByTagName('header')[0].clientHeight
+
+      const diffHeight = windowHeight - headerHeight
+
+      this.mapHeight = diffHeight.toString() + 'px'
+    },
+
     selectStopPoint (stopId) {
       const params = { stopId }
       this.getRoutes(params)
@@ -167,8 +192,8 @@ export default {
 </script>
 
 <style scoped>
-.map {
-  height: 100vh;
+#map-container {
   z-index: 0;
+  position: relative;
 }
 </style>
