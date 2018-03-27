@@ -1,9 +1,9 @@
 const pg = require('pg')
 
 const connectionString = {
-  user: 'caiogranero',
+  user: 'postgres',
   host: 'localhost',
-  database: 'aqui_tem_rota_dev',
+  database: 'aqui_tem_rota',
   password: '123',
   port: 5432
 }

@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const MapInstance = axios.create({
-  baseURL: '/api/map',
+  baseURL: 'http://localhost:3000/api/map',
   timeout: 30000
 })
 

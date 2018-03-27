@@ -1,8 +1,0 @@
-{
-  "name": "aqui-tem-rota-front",
-  "version": "1.0.0",
-  "description": "Aplicação web desenvolvida com base nos dados no padrão GTFS disponibilizados pela SPTrans a respeito do transporte público da cidade de São Paulo.",
-  "author": "Caio Granero <caio.granero@usp.br>",
-  "private": true,
-  "dependencies": {}
-}

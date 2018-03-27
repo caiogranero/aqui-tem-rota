@@ -8,7 +8,7 @@ default: &default
   encoding: unicode
   database: aqui_tem_rota
   pool: 5
-  username: "caiogranero"
+  username: "postgres"
   password: "123"
 
 development:
